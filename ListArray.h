@@ -29,30 +29,34 @@ class ListArray : public List<T> {
 			     arr = new T[MINSIZE];
 		    }
 
-		    ~ListArray();
+		    ~ListArray(){
+			    delete[] arr;
+		    }
 
 		    T operator[](int pos){
 			    if(pos < 0 || pos >= size()){
-					throw out_of_range();
-				    }
+		     		throw out_of_range("Fuera de rango");
+        		    }
 			    else{
-					return arr[pos];
-				    }
+		     		return arr[pos];
+		    	    }
 		    }
 
+
 		    friend ostream& operator<<(ostream &out, const ListArray<T> &list){
-			    out << list->arr << "\n" << list.max << "\n" << list.n << "\n" << list.MINSIZE << endl;
-			    return out;
+        		    out << list.arr << "\n" << list.max << "\n" << list.n << "\n" << list.MINSIZE << endl;
+	                    return out;
 		    }
+
 
 		    void insert(int pos, T e){
 			    if(pos >= 0 && pos <= size()){
 			    	arr[pos] = e;
 			    }
 			    else{
-				throw out_of_range();
+				throw out_of_range("Fuera de rango");
 			    }
-			    size() = size() + 1;
+			    n = n + 1;
 
 		    }
 		    void append(T e){
@@ -82,11 +86,11 @@ class ListArray : public List<T> {
 				T num = arr[pos];
 				delete[] arr;
 				arr = aux;
-				size() = size() - 1;
+				n = n - 1;
 				return num;
 		            }    
 			    else{
-				throw out_of_range();
+				throw out_of_range("Fuera de rango");
 			    }	
 		    }
 
@@ -95,7 +99,7 @@ class ListArray : public List<T> {
 				return arr[pos];
 			    }
 			    else{
-				throw out_of_range();
+				throw out_of_range("Fuera de rango");
 			    }
 		    }
 		    int search(T e){
@@ -127,3 +131,7 @@ class ListArray : public List<T> {
 
 
 };
+
+
+
+
