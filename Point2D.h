@@ -7,7 +7,7 @@ class Point2D{
 	public:
 		double x;
 		double y;
-		Point2D(int x, int y);
+		Point2D(double x=0.0, double y=0.0);
 		static double distance(const Point2D &a, const Point2D &b);
 	        friend bool operator==(const Point2D&, const Point2D&);
 		friend bool operator!=(const Point2D&, const Point2D&);

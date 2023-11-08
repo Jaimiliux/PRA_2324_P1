@@ -2,7 +2,7 @@
 #include <ostream>
 #include <cmath>
 
-	Point2D::Point2D(int x=0, int y=0) : x(x), y(x) {}
+	Point2D::Point2D(double x, double y) : x(x), y(y) {}
 	bool operator==(const Point2D &a, const Point2D &b){
 		return a.x == b.x && a.y == b.y;
 	}

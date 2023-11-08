@@ -1,6 +1,8 @@
 #include <ostream>
 #include "List.h"
 #include "Node.h"
+#ifndef LISTLINKED_H
+#define LISTLINKED_H
 
 template <typename T>
 class ListLinked : public List<T> {
@@ -39,7 +41,7 @@ class ListLinked : public List<T> {
 		     void insert(int pos, T e){
 			     if(pos >= 0 && pos <= n){
 				     if(pos == 0){
-	                                        first = new Node(e,first->next);
+	                                        first = new Node(e,first);
 				     }
 				     if(pos == n){
 						Node<T>* aux = first;
@@ -114,7 +116,7 @@ class ListLinked : public List<T> {
 		     T get(int pos){
 			     if(pos >= 0 && pos < n){
 				     Node<T>* aux = first; 
-				     for(int i; i < pos; i++){
+				     for(int i=0; i < pos; i++){
 					     aux = aux->next;
 				     }
 				     return aux->data;
@@ -142,5 +144,7 @@ class ListLinked : public List<T> {
 		     int size(){
 			     return n;
 		     }
+
 };
-		     
+
+#endif 		     
