@@ -34,7 +34,7 @@ class ListArray : public List<T> {
 		    }
 
 		    T operator[](int pos){
-			    if(pos < 0 || pos >= size()){
+			    if(pos < 0 || pos > n){
 		     		throw out_of_range("Fuera de rango");
         		    }
 			    else{
@@ -44,27 +44,36 @@ class ListArray : public List<T> {
 
 
 		    friend ostream& operator<<(ostream &out, const ListArray<T> &list){
-        		    out << list.arr << "\n" << list.max << "\n" << list.n << "\n" << list.MINSIZE << endl;
+        		    out << " " << list.n << " "  << endl;
+			    for(int i = 0; i < list.n; i++){
+				    out << "[" << list.get(i) << "] ";
+			    }
+			    out << endl; 
 	                    return out;
 		    }
 
 
 		    void insert(int pos, T e){
-			    if(pos >= 0 && pos <= size()){
-			    	arr[pos] = e;
+			    if(pos >= 0 && pos <= n){
+				for(int i = n; i >= pos+1; i--){
+			    	arr[i] = arr[i-1];
+			    	}
+			    n++;
+			    arr[pos] = e;
 			    }
 			    else{
 				throw out_of_range("Fuera de rango");
 			    }
-			    n = n + 1;
-
 		    }
 		    void append(T e){
-			    insert(size() , e);
+			    if(n >= max){
+				    resize(n+1);
+			    }	
+			    insert(n , e);
 		    }
 		    void prepend(T e){
-			    for( int i = 0; i < size(); i++){
-				arr[i+1]= arr[i];
+			    if(n >= max-1){
+				    resize(n+1);
 			    }
 	    		    insert( 0 , e);
 		    }
@@ -79,8 +88,8 @@ class ListArray : public List<T> {
 					;
 				}
 				else{
-				for(int i = pos; i < size() - 1; i++){
-					aux[i] = arr[i+1];
+				        for(int i = pos; i <= n; i++){
+					       aux[i] = arr[i+1];
 					}
 				}
 				T num = arr[pos];
@@ -94,8 +103,8 @@ class ListArray : public List<T> {
 			    }	
 		    }
 
-		    T get(int pos){
-			    if(pos > 0 && pos < size()){
+		    T get(int pos) const override{
+			    if(pos >= 0 && pos < n){
 				return arr[pos];
 			    }
 			    else{
@@ -126,12 +135,4 @@ class ListArray : public List<T> {
                                         
 
 		
-						 
-			     
-
-
 };
-
-
-
-
